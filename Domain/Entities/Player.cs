@@ -1,12 +1,10 @@
-﻿using Domain.Common;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
-    public class Player : BaseEntity
+    public class Player
     {
-        public IList<Card> Hand { get; set; } = new List<Card>();
+        public int Id { get; set; }
+        public ICollection<PlayerCard> Hand { get; set; } = new List<PlayerCard>();
         public bool IsPlaying { get; set; }
-        public int? SeatNumber { get; set; }
 
         public int? GameId { get; set; }
         public Game? CurrentGame { get; set; }

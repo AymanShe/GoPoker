@@ -1,10 +1,9 @@
-﻿using Domain.Common;
-
-namespace Domain.Entities
+﻿namespace Domain.Entities
 {
-    public class Game : BaseEntity
+    public class Game
     {
-        public Shoe Shoe { get; set; } = new();
+        public int Id { get; set; }
         public ICollection<Player> Players { get; set; } = new List<Player>();
+        public virtual Shoe Shoe { get; set; } = new();
     }
 }

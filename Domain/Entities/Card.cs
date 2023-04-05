@@ -2,15 +2,9 @@
 
 namespace Domain.Entities
 {
-    public struct Card
+    public abstract class Card
     {
-        public Suit Suit { get; }
-        public Value Value { get; }
-
-        public Card(Suit suit, Value value)
-        {
-            Suit = suit;
-            Value = value;
-        }
+        public Suit Suit { get; init; }
+        public Rank Rank { get; init; }
     }
 }
