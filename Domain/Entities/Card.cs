@@ -1,6 +1,6 @@
-﻿using static Domain.Enums;
+﻿using Domain.Enums;
 
-namespace Domain
+namespace Domain.Entities
 {
     public struct Card
     {
