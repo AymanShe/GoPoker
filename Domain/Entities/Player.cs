@@ -1,14 +1,14 @@
-﻿namespace Domain.Entities
-{
-    public class Player
-    {
-        public int SeatNumber { get; set; }
-        public IList<Card> Hand { get; set; }// TODO: could be it's own class to add count and combined value of cards
+﻿using Domain.Common;
 
-        public Player(int seatNumber)
-        {
-            SeatNumber = seatNumber;
-            Hand = new List<Card>();
-        }
+namespace Domain.Entities
+{
+    public class Player : BaseEntity
+    {
+        public IList<Card> Hand { get; set; } = new List<Card>();
+        public bool IsPlaying { get; set; }
+        public int? SeatNumber { get; set; }
+
+        public int? GameId { get; set; }
+        public Game? CurrentGame { get; set; }
     }
 }
