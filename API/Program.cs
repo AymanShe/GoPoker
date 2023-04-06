@@ -13,6 +13,10 @@ builder.Services.AddDbContext<GoPokerDbContext>(opt => opt.UseSqlServer(builder.
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 
+
+builder.Services.AddScoped<IPlayerCardService, PlayerCardService>();
+builder.Services.AddScoped<IPlayerCardRepository, PlayerCardRepository>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
