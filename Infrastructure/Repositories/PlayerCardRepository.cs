@@ -28,6 +28,7 @@ namespace Infrastructure.Repositories
         public void Delete(PlayerCard playerCard)
         {
             _context.PlayerCards.Remove(playerCard);
+            _context.SaveChanges();
         }
 
         public IList<PlayerCard> GetAll()

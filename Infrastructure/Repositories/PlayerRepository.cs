@@ -21,6 +21,7 @@ namespace Infrastructure.Repositories
         {
             _context.Add(player);
             _context.SaveChanges();
+
             return player;
         }
 
