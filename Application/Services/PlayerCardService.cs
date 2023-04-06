@@ -1,4 +1,6 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
+using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Interfaces;
@@ -9,15 +11,18 @@ namespace Application.Services
     {
         private readonly IPlayerCardRepository _playerCardRepository;
         private readonly IPlayerRepository _playerRepository;
+        private readonly IMapper _mapper;
 
-        public PlayerCardService(IPlayerCardRepository playerCardRepository, IPlayerRepository playerRepository)
+        public PlayerCardService(IPlayerCardRepository playerCardRepository, IPlayerRepository playerRepository, IMapper mapper)
         {
             _playerCardRepository = playerCardRepository;
             _playerRepository = playerRepository;
+            _mapper = mapper;
         }
-        public PlayerCard AssignCardToPlayer(PlayerCard card, int playerId)
+        public PlayerCardDto AssignCardToPlayer(PlayerCardDto cardDto)
         {
-            var player = _playerRepository.GetById(playerId);
+            var card = _mapper.Map<PlayerCard>(cardDto);
+            var player = _playerRepository.GetById(card.PlayerId);
             if (player == null)
             {
                 throw new ArgumentException("Player doesn't exist");// TODO: handle
@@ -27,7 +32,7 @@ namespace Application.Services
             card.Player = player;
             _playerCardRepository.Update(card);
 
-            return card;
+            return _mapper.Map<PlayerCardDto>(card);
         }
 
         public PlayerCard AssignCardToPlayer(Suit suit, Rank rank, int playerId)
@@ -58,9 +63,9 @@ namespace Application.Services
             return _playerCardRepository.GetAll().Where(p => p.PlayerId == playerId).ToList();
         }
 
-        public IList<PlayerCard> GetAllPlayersCards()
+        public IList<PlayerCardDto> GetAllPlayersCards()
         {
-            return _playerCardRepository.GetAll();
+            return _mapper.Map<IList<PlayerCardDto>>(_playerCardRepository.GetAll());
         }
 
         public PlayerCard? GetPlayerCardById(int id)

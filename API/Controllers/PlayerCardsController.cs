@@ -1,6 +1,5 @@
-﻿using API.DTOs;
+﻿using Application.DTOs;
 using Application.Interfaces;
-using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -45,9 +44,9 @@ namespace API.Controllers
         /// <returns></returns>
         // POST api/<PlayrCardsController>
         [HttpPost]
-        public IActionResult Post([FromBody] PlayerCard card, int PlayerId)
+        public IActionResult Post([FromBody] PlayerCardDto card)
         {
-            var cardInDb = _playerCardService.AssignCardToPlayer(card, PlayerId);
+            var cardInDb = _playerCardService.AssignCardToPlayer(card);
             return Ok(cardInDb);
         }
         /// <summary>

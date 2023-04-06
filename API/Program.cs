@@ -8,11 +8,14 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+// db services
 builder.Services.AddDbContext<GoPokerDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("API")));
 
+// Application services
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
-
 
 builder.Services.AddScoped<IPlayerCardService, PlayerCardService>();
 builder.Services.AddScoped<IPlayerCardRepository, PlayerCardRepository>();
