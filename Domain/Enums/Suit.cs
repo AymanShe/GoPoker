@@ -2,7 +2,7 @@
 {
     public enum Suit
     {
-        Hearts,
+        Hearts = 1,
         Spades,
         Clubs,
         Diamonds
