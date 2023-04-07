@@ -9,8 +9,8 @@ namespace Application.Interfaces
 {
     public interface IShoeService
     {
-        public PlayerCardDto DealCardToPlayer(int playerId);// TODO consider moving this to the GameService
         public void ShuffleCard(int shoeId);
+        public PlayerCardDto DealCardToPlayer(int shoeId, int playerId);// TODO consider moving this to the GameService
         public void UpdateNumberOfDecksAfterAdding(int shoeId);
     }
 }

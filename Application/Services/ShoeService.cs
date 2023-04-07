@@ -27,10 +27,10 @@ namespace Application.Services
         }
 
 
-        public PlayerCardDto DealCardToPlayer(int playerId)
+        public PlayerCardDto DealCardToPlayer(int shoeId, int playerId)
         {
-            // Get the card info from show
-            var shoeCard = _shoeCardRepository.GetAll().FirstOrDefault();
+            // Get the first card from the shoe
+            var shoeCard = _shoeCardRepository.GetAll().Where(x => x.ShoeId == shoeId).OrderBy(x => x.Position).FirstOrDefault();
             if (shoeCard == null)
             {
                 throw new NotImplementedException();// No more cards
@@ -54,7 +54,7 @@ namespace Application.Services
         public void UpdateNumberOfDecksAfterAdding(int shoeId)
         {
             var shoe = _shoeRepository.GetById(shoeId);
-            if(shoe == null)
+            if (shoe == null)
             {
                 throw new NotImplementedException();
             }

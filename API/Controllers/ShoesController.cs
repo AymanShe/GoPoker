@@ -17,10 +17,10 @@ namespace API.Controllers
         }
 
         // PUT api/<ShoesController>/5
-        [HttpPut("{playerId}")]
-        public IActionResult Put(int playerId)
+        [HttpPut("{id}/deal/{playerId}")]
+        public IActionResult Put(int id, int playerId)
         {
-            var playerCardDto = _shoeService.DealCardToPlayer(playerId);
+            var playerCardDto = _shoeService.DealCardToPlayer(id, playerId);
 
             return Ok(playerCardDto);
         }
