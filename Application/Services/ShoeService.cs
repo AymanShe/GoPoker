@@ -64,7 +64,7 @@ namespace Application.Services
             _shoeRepository.Update(shoe);
         }
 
-        public IList<ShoeCardDto> ShuffleCards(int shoeId)
+        public void ShuffleCards(int shoeId)
         {
             var shoeCards = _shoeCardRepository.GetAll().Where(x => x.ShoeId == shoeId).OrderBy(x => Guid.NewGuid()).ToList();
 
@@ -73,8 +73,6 @@ namespace Application.Services
                 shoeCards[i].Position = i + 1;
                 _shoeCardRepository.Update(shoeCards[i]);
             }
-
-            return _mapper.Map<IList<ShoeCardDto>>(shoeCards);
         }
     }
 }

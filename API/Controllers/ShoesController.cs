@@ -29,9 +29,9 @@ namespace API.Controllers
         [HttpPut("{id}/shuffle")]
         public IActionResult Put(int id)
         {
-            var shuffledCards = _shoeService.ShuffleCards(id);
+            _shoeService.ShuffleCards(id);
 
-            return Ok(shuffledCards);
+            return Ok();
         }
     }
 }
