@@ -3,7 +3,7 @@
     public class Game
     {
         public int Id { get; set; }
-        public Shoe? Shoe { get; set; }
-        public ICollection<Player> Players { get; } = new List<Player>();
+        public virtual Shoe? Shoe { get; set; }
+        public virtual ICollection<Player> Players { get; } = new List<Player>();
     }
 }

@@ -7,8 +7,8 @@ namespace Domain.Entities
         public int Id { get; set; }
         public int NumberOfDecks { get; set; }
         public int GameId { get; set; }
-        public Game Game { get; set; } = null!;
-        public ICollection<ShoeCard> Cards { get; } = new List<ShoeCard>();
+        public virtual Game Game { get; set; } = null!;
+        public virtual ICollection<ShoeCard> Cards { get; } = new List<ShoeCard>();
         
     }
 }

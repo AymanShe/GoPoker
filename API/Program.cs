@@ -11,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // db services
-builder.Services.AddDbContext<GoPokerDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("API")));
+builder.Services.AddDbContext<GoPokerDbContext>(opt => opt.
+    UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("API")).
+    UseLazyLoadingProxies());
 
 // Application services
 builder.Services.AddScoped<IPlayerService, PlayerService>();
