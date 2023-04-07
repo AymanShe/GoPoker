@@ -63,9 +63,10 @@ namespace Application.Services
             return card;
         }
 
-        public IList<PlayerCard> GetAllPlayersCardsByPlayerId(int playerId)
+        public IList<PlayerCardDto> GetAllPlayersCardsByPlayerId(int playerId)
         {
-            return _playerCardRepository.GetAll().Where(p => p.PlayerId == playerId).ToList();
+            var cards = _playerCardRepository.GetAll().Where(p => p.PlayerId == playerId).ToList(); ;
+            return _mapper.Map<IList<PlayerCardDto>>(cards);
         }
 
         public IList<PlayerCardDto> GetAllPlayersCards()
@@ -73,14 +74,9 @@ namespace Application.Services
             return _mapper.Map<IList<PlayerCardDto>>(_playerCardRepository.GetAll());
         }
 
-        public PlayerCard? GetPlayerCardById(int id)
+        public PlayerCardDto? GetPlayerCardById(int id)
         {
-            return _playerCardRepository.GetById(id);
-        }
-
-        public void RemoveCardFromPlayer(PlayerCard card)
-        {
-            _playerCardRepository.Delete(card);
+            return _mapper.Map<PlayerCardDto>(_playerCardRepository.GetById(id));
         }
     }
 }

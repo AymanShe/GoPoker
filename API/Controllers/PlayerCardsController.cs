@@ -27,7 +27,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var playerCard = _playerCardService.GetPlayerCardById(id);
+            var playerCard = _playerCardService.GetAllPlayersCardsByPlayerId(id);
             if(playerCard == null)
             {
                 return NotFound();
