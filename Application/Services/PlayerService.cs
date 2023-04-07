@@ -1,4 +1,6 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
+using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 
@@ -7,50 +9,63 @@ namespace Application.Services
     public class PlayerService : IPlayerService
     {
         private readonly IPlayerRepository _playerRepository;
+        private readonly IMapper _mapper;
 
-        public PlayerService(IPlayerRepository playerRepository)
+        public PlayerService(IPlayerRepository playerRepository, IMapper mapper)
         {
             _playerRepository = playerRepository;
+            _mapper = mapper;
         }
 
-        public Player CreatePlayer(Player player)
+
+        public GetPlayerDto AddPlayerToGame(AddPlayerDto playerDto)
         {
-            _playerRepository.Add(player);
-            return player;
+            //TODO validate game exists
+            var player = new Player
+            {
+                GameId = playerDto.GameId,
+                IsPlaying = true
+            };
+
+            player = _playerRepository.Add(player);
+            
+            return _mapper.Map<GetPlayerDto>(player);
         }
 
-        public Player GetPlayerById(int id)
+        public void RemovePlayerFromGame(int playerId)
         {
-            return _playerRepository.GetById(id);
-        }
+            var player = _playerRepository.GetById(playerId);
+            if(player == null)
+            {
+                throw new ArgumentException("Player doesn't exist");// Revise excpetion
+            }
 
-        public IList<Player> GetAllPlayers()
-        {
-            return _playerRepository.GetAll();
-        }
-
-        public IList<Player> GetAllPlayersByGameId(int gameId)
-        {
-            return _playerRepository.GetAll().Where(p => p.GameId == gameId).ToList();
-        }
-
-        public Player UpdatePlayer(Player player)
-        {
-            // TODO: add validation and null checks
-            var playerInDb = _playerRepository.GetById(player.Id);
-
-            playerInDb.IsPlaying = player.IsPlaying;
-            playerInDb.GameId = player.GameId;
-
-            _playerRepository.Update(playerInDb);
-
-            return playerInDb;
-        }
-
-        public void DeletePlayer(Player player)
-        {
-            // TODO: add validation and null checks
             _playerRepository.Delete(player);
+        }
+
+        GetPlayerDto IPlayerService.GetPlayerById(int id)
+        {
+            var player = _playerRepository.GetById(id);
+            if (player == null)
+            {
+                throw new ArgumentException("Player doesn't exist");// Revise excpetion
+            }
+
+            return _mapper.Map<GetPlayerDto>(player);
+        }
+
+        IList<GetPlayerDto> IPlayerService.GetAllPlayers()
+        {
+            var player = _playerRepository.GetAll();
+
+            return _mapper.Map<IList<GetPlayerDto>>(player);
+        }
+
+        IList<GetPlayerDto> IPlayerService.GetAllPlayersByGameId(int gameId)
+        {
+            var player = _playerRepository.GetAll().Where(x=>x.GameId == gameId).ToList();
+
+            return _mapper.Map<IList<GetPlayerDto>>(player);
         }
     }
 }

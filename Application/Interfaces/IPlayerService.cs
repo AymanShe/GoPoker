@@ -1,14 +1,14 @@
-﻿using Domain.Entities;
+﻿using Application.DTOs;
+using Domain.Entities;
 
 namespace Application.Interfaces
 {
     public interface IPlayerService
     {
-        Player CreatePlayer(Player player);
-        Player GetPlayerById(int id);
-        IList<Player> GetAllPlayers();
-        IList<Player> GetAllPlayersByGameId(int gameId);
-        Player UpdatePlayer(Player player);
-        void DeletePlayer(Player player);
+        GetPlayerDto AddPlayerToGame(AddPlayerDto player);
+        void RemovePlayerFromGame(int playerId);
+        GetPlayerDto GetPlayerById(int id);
+        IList<GetPlayerDto> GetAllPlayers();
+        IList<GetPlayerDto> GetAllPlayersByGameId(int gameId);
     }
 }

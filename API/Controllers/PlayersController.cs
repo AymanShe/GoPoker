@@ -1,8 +1,7 @@
-﻿using Application.Interfaces;
-using Application.Services;
-using Domain.Entities;
+﻿using Application.DTOs;
+using Application.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Numerics;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,17 +12,19 @@ namespace API.Controllers
     public class PlayersController : ControllerBase
     {
         private readonly IPlayerService _playerService;
+        private readonly IMapper _mapper;
 
-        public PlayersController(IPlayerService playerService)
+        public PlayersController(IPlayerService playerService, IMapper mapper)
         {
             _playerService = playerService;
+            _mapper = mapper;
         }
 
 
 
         // GET: api/<PlayersController>
         [HttpGet]
-        public IActionResult Get()//TODO: create player DTO
+        public IActionResult Get()
         {
             var players = _playerService.GetAllPlayers();
             return Ok(players);
@@ -31,7 +32,7 @@ namespace API.Controllers
 
         // GET api/<PlayersController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)//TODO: create player DTO
+        public IActionResult Get(int id)
         {
             var player = _playerService.GetPlayerById(id);
             if (player == null)
@@ -43,28 +44,10 @@ namespace API.Controllers
 
         // POST api/<PlayersController>
         [HttpPost]
-        public IActionResult Post([FromBody] Player newplayer)//TODO: create player DTO
+        public IActionResult Post([FromBody] AddPlayerDto playerDto)
         {
-            var player = _playerService.CreatePlayer(newplayer);
+            var player = _playerService.AddPlayerToGame(playerDto);
             return Ok(player);
-        }
-
-        // PUT api/<PlayersController>/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Player player)//TODO: create player DTO
-        {
-            if (id != player.Id)
-            {
-                return BadRequest();
-            }
-
-            var playerInDb = _playerService.UpdatePlayer(player);
-            if (playerInDb == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(playerInDb);
         }
 
         // DELETE api/<PlayersController>/5
@@ -77,7 +60,7 @@ namespace API.Controllers
                 return NotFound();
             }
 
-            _playerService.DeletePlayer(player);
+            _playerService.RemovePlayerFromGame(id);
 
             return NoContent();
         }
