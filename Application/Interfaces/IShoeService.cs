@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Application.Interfaces
 {
     public interface IShoeService
     {
-        public void ShuffleCard(int shoeId);
         public PlayerCardDto DealCardToPlayer(int shoeId, int playerId);// TODO consider moving this to the GameService
+        public IList<ShoeCardDto> ShuffleCards(int shoeId);
         public void UpdateNumberOfDecksAfterAdding(int shoeId);
     }
 }

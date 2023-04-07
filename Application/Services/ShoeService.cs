@@ -64,11 +64,17 @@ namespace Application.Services
             _shoeRepository.Update(shoe);
         }
 
-        public void ShuffleCard(int shoeId)
+        public IList<ShoeCardDto> ShuffleCards(int shoeId)
         {
-            throw new NotImplementedException();
-        }
+            var shoeCards = _shoeCardRepository.GetAll().Where(x => x.ShoeId == shoeId).OrderBy(x => Guid.NewGuid()).ToList();
 
-        
+            for (int i = 0; i < shoeCards.Count; i++)
+            {
+                shoeCards[i].Position = i + 1;
+                _shoeCardRepository.Update(shoeCards[i]);
+            }
+
+            return _mapper.Map<IList<ShoeCardDto>>(shoeCards);
+        }
     }
 }

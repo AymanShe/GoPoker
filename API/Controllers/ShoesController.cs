@@ -24,5 +24,14 @@ namespace API.Controllers
 
             return Ok(playerCardDto);
         }
+
+        // PUT api/<ShoesController>/5
+        [HttpPut("{id}/shuffle")]
+        public IActionResult Put(int id)
+        {
+            var shuffledCards = _shoeService.ShuffleCards(id);
+
+            return Ok(shuffledCards);
+        }
     }
 }
