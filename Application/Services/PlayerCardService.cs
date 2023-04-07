@@ -19,20 +19,25 @@ namespace Application.Services
             _playerRepository = playerRepository;
             _mapper = mapper;
         }
-        public PlayerCardDto AssignCardToPlayer(PlayerCardDto cardDto)
+        public PlayerCardDto AssignCardToPlayer(PlayerCardDto playerCardDto)
         {
-            var card = _mapper.Map<PlayerCard>(cardDto);
-            var player = _playerRepository.GetById(card.PlayerId);
+            var player = _playerRepository.GetById(playerCardDto.PlayerId);
             if (player == null)
             {
                 throw new ArgumentException("Player doesn't exist");// TODO: handle
             };
 
-            card.PlayerId = player.Id;
-            card.Player = player;
-            _playerCardRepository.Update(card);
+            var playerCard = new PlayerCard
+            {
+                PlayerId = player.Id,
+                Rank = playerCardDto.Rank,
+                Suit = playerCardDto.Suit,
+                Player = player// TODO do i really need this
+            };
 
-            return _mapper.Map<PlayerCardDto>(card);
+            _playerCardRepository.Add(playerCard);
+
+            return _mapper.Map<PlayerCardDto>(playerCard);
         }
 
         public PlayerCard AssignCardToPlayer(Suit suit, Rank rank, int playerId)
