@@ -20,6 +20,9 @@ builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 builder.Services.AddScoped<IPlayerCardService, PlayerCardService>();
 builder.Services.AddScoped<IPlayerCardRepository, PlayerCardRepository>();
 
+builder.Services.AddScoped<IShoeService, ShoeService>();
+builder.Services.AddScoped<IShoeRepository, ShoeRepository>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
