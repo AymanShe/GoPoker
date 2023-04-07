@@ -19,6 +19,14 @@ namespace Infrastructure.Repositories
             return shoeCard;
         }
 
+        public List<ShoeCard> AddRange(List<ShoeCard> shoeCards)
+        {
+            _context.AddRange(shoeCards);
+            _context.SaveChanges();
+
+            return shoeCards;
+        }
+
         public void Delete(ShoeCard shoeCard)
         {
             _context.ShoeCards.Remove(shoeCard);
