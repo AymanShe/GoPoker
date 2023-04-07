@@ -8,6 +8,7 @@ namespace Domain.Interfaces
         ShoeCard? GetById(int id);
         IList<ShoeCard> GetAll();
         void Update(ShoeCard shoeCard);
+        void UpdateAll(IList<ShoeCard> shoeCards);
         void Delete(ShoeCard shoeCard);
     }
 }

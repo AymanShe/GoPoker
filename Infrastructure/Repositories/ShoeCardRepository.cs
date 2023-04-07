@@ -40,5 +40,11 @@ namespace Infrastructure.Repositories
             _context.ShoeCards.Update(shoeCard);
             _context.SaveChanges();
         }
+
+        public void UpdateAll (IList<ShoeCard> shoeCards)
+        {
+            _context.ShoeCards.UpdateRange(shoeCards);
+            _context.SaveChanges();
+        }
     }
 }
