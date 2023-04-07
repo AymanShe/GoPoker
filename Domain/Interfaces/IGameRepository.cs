@@ -6,7 +6,7 @@ namespace Domain.Interfaces
     {
         Game Add(Game game);
         Game? GetById(int id);
-        IList<Game> GetAll();
+        List<Game> GetAll();
         void Update(Game game);
         void Delete(Game game);
     }

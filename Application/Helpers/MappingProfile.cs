@@ -8,6 +8,8 @@ namespace Application.Helpers
     {
         public MappingProfile()
         {
+            CreateMap<Game, GameDto>().ReverseMap();
+
             CreateMap<PlayerCard, PlayerCardDto>().ReverseMap();
 
             CreateMap<ShoeCard, ShoeCardDto>().ReverseMap();

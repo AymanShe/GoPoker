@@ -3,7 +3,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Repositories
 {
-    internal class GameRepository : IGameRepository
+    public class GameRepository : IGameRepository
     {
         private readonly GoPokerDbContext _context;
 
@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        public IList<Game> GetAll()
+        public List<Game> GetAll()
         {
             return _context.Games.ToList();
         }

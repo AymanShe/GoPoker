@@ -23,28 +23,32 @@ namespace Infrastructure
                 .HasOne(e => e.Shoe)
                 .WithOne(e => e.Game)
                 .HasForeignKey<Shoe>(e => e.GameId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             // optional one-to-many Game and Player
             modelBuilder.Entity<Game>()
                 .HasMany(e => e.Players)
                 .WithOne(e => e.Game)
                 .HasForeignKey(e => e.GameId)
-                .IsRequired(false);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // required one-to-many Player and PlayerCard
             modelBuilder.Entity<Player>()
                 .HasMany(e => e.Cards)
                 .WithOne(e => e.Player)
                 .HasForeignKey(e => e.PlayerId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
 
             // required one-to-many Shoe and ShoeCard
             modelBuilder.Entity<Shoe>()
                 .HasMany(e => e.Cards)
                 .WithOne(e => e.Shoe)
                 .HasForeignKey(e => e.ShoeId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Game> Games { get; set; }
