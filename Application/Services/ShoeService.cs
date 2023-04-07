@@ -30,7 +30,7 @@ namespace Application.Services
         public PlayerCardDto DealCardToPlayer(int shoeId, int playerId)
         {
             // Get the first card from the shoe
-            var shoeCard = _shoeCardRepository.GetAll().Where(x => x.ShoeId == shoeId).OrderBy(x => x.Position).FirstOrDefault();
+            var shoeCard = _shoeCardRepository.GetAll().Where(x => x.ShoeId == shoeId).OrderByDescending(x => x.Position).FirstOrDefault();
             if (shoeCard == null)
             {
                 throw new NotImplementedException();// No more cards
