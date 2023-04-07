@@ -3,7 +3,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Repositories
 {
-    internal class ShoeRepository : IShoeRepository
+    public class ShoeRepository : IShoeRepository
     {
         private readonly GoPokerDbContext _context;
 
