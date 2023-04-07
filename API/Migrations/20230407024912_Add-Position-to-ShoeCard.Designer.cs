@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(GoPokerDbContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230407024912_Add-Position-to-ShoeCard")]
+    partial class AddPositiontoShoeCard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +35,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Games", (string)null);
+                    b.ToTable("Games");
                 });
 
             modelBuilder.Entity("Domain.Entities.Player", b =>
@@ -53,7 +56,7 @@ namespace API.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Players", (string)null);
+                    b.ToTable("Players");
                 });
 
             modelBuilder.Entity("Domain.Entities.PlayerCard", b =>
@@ -77,7 +80,7 @@ namespace API.Migrations
 
                     b.HasIndex("PlayerId");
 
-                    b.ToTable("PlayerCards", (string)null);
+                    b.ToTable("PlayerCards");
                 });
 
             modelBuilder.Entity("Domain.Entities.Shoe", b =>
@@ -99,7 +102,7 @@ namespace API.Migrations
                     b.HasIndex("GameId")
                         .IsUnique();
 
-                    b.ToTable("Shoes", (string)null);
+                    b.ToTable("Shoes");
                 });
 
             modelBuilder.Entity("Domain.Entities.ShoeCard", b =>
@@ -126,7 +129,7 @@ namespace API.Migrations
 
                     b.HasIndex("ShoeId");
 
-                    b.ToTable("ShoeCards", (string)null);
+                    b.ToTable("ShoeCards");
                 });
 
             modelBuilder.Entity("Domain.Entities.Player", b =>
