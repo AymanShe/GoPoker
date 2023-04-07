@@ -9,6 +9,9 @@ namespace Application.Helpers
         public MappingProfile()
         {
             CreateMap<PlayerCard, PlayerCardDto>().ReverseMap();
+
+            CreateMap<Player, AddPlayerDto>().ReverseMap();
+            CreateMap<Player, GetPlayerDto>().ReverseMap();
         }
     }
 }
